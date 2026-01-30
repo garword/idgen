@@ -49,16 +49,54 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Photo Input
+    // Photo Input - With Resize Logic
     photoInput.addEventListener('change', function (e) {
         const file = e.target.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onload = function (readerEvent) {
-                // Update Preview
-                cardPhoto.src = readerEvent.target.result;
-                // Store for API
-                currentPhotoBase64 = readerEvent.target.result;
+                // 1. Create an Image object
+                const img = new Image();
+                img.src = readerEvent.target.result;
+
+                img.onload = function () {
+                    // 2. Setup Canvas for Resizing
+                    const MAX_WIDTH = 600; // Sufficient for ID card
+                    const MAX_HEIGHT = 800;
+                    let width = img.width;
+                    let height = img.height;
+
+                    // Calculate new dimensions
+                    if (width > height) {
+                        if (width > MAX_WIDTH) {
+                            height *= MAX_WIDTH / width;
+                            width = MAX_WIDTH;
+                        }
+                    } else {
+                        if (height > MAX_HEIGHT) {
+                            width *= MAX_HEIGHT / height;
+                            height = MAX_HEIGHT;
+                        }
+                    }
+
+                    const canvas = document.createElement('canvas');
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+
+                    // 3. Draw resized image
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    // 4. Export compressed Base64 (JPEG 0.8 quality usually < 200KB)
+                    const compressedBase64 = canvas.toDataURL('image/jpeg', 0.8);
+
+                    // Update UI and Variable
+                    cardPhoto.src = compressedBase64;
+                    currentPhotoBase64 = compressedBase64;
+
+                    console.log('Original size:', Math.round(file.size / 1024), 'KB');
+                    console.log('Compressed size:', Math.round(compressedBase64.length * 0.75 / 1024), 'KB');
+                };
             }
             reader.readAsDataURL(file);
         }
