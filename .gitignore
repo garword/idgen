@@ -1,21 +1,34 @@
-# Dependencies
-node_modules/
 
-# Environment
-.env
+# dependencies
+node_modules
+.pnp
+.pnp.js
 
-# Generated files
-temp/
-*.png
-*.jpg
+# testing
+coverage
 
-# API Keys (sensitive)
-data/api-keys.json
+# next.js
+.next/
+out/
 
-# Logs
-*.log
-npm-debug.log*
+# production
+build
 
-# OS
+# misc
 .DS_Store
-Thumbs.db
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env*.local
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
