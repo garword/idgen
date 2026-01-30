@@ -109,19 +109,30 @@ export default function Home() {
         {error && <p className="error">{error}</p>}
       </section>
 
+      {/* Live Preview Section */}
       <section className="preview-section">
-        <div className="preview-note">
-          <p>Live Preview (Simplified)</p>
-          <div className="card-mockup">
-            <div className="mockup-photo">
-              {previewPhoto ? <img src={previewPhoto} /> : <div className="placeholder">Photo</div>}
-            </div>
-            <div className="mockup-info">
-              <h2>{formData.name}</h2>
-              <p>{formData.role}</p>
-              <p className="id-num">{formData.idNumber}</p>
-            </div>
+        <div className="card-container" id="cardToCapture">
+          {/* Photo Area */}
+          <div className="photo-area">
+            {previewPhoto ? (
+              <img src={previewPhoto} alt="ID Photo" className="id-photo" />
+            ) : (
+              <div style={{ width: '100%', height: '100%', backgroundColor: '#ccc', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#666', fontSize: '12px' }}>
+                NO PHOTO
+              </div>
+            )}
           </div>
+
+          {/* Info Area */}
+          <div className="info-area">
+            <div className="name" dangerouslySetInnerHTML={{ __html: formData.name.replace(/\n/g, '<br/>') || 'YOUR NAME' }}></div>
+            <div className="role">{formData.role || 'ROLE'}</div>
+            <div className="id-number">ID: {formData.idNumber || '000000'}</div>
+          </div>
+
+          {/* Decoratives (Barcode placeholder) */}
+          <div className="barcode-area"></div>
+          {/* <div className="validity">Valid: 2023-2024</div> */}
         </div>
       </section>
     </div>

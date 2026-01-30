@@ -1,0 +1,201 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --foreground-rgb: 0, 0, 0;
+    --background-start-rgb: 245, 245, 245;
+    --background-end-rgb: 255, 255, 255;
+}
+
+body {
+    color: rgb(var(--foreground-rgb));
+    background: linear-gradient(to bottom,
+            transparent,
+            rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+}
+
+/* Controls Section */
+.controls-section {
+    width: 400px;
+    background-color: #ffffff;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.controls-section h2 {
+    margin-bottom: 0.5rem;
+    color: #002147;
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #444;
+}
+
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+/* Download Button Styles */
+.download-btn {
+    background-color: #002147;
+    color: white;
+    padding: 1rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    transition: background-color 0.2s;
+}
+
+.download-btn:hover {
+    background-color: #003366;
+}
+
+.instructions {
+    margin-top: auto;
+    background-color: #eef;
+    padding: 1rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: #446;
+}
+
+/* Preview Section */
+.preview-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #333;
+    overflow: hidden;
+}
+
+/* --- CARD CONTAINER (HIGH FIDELITY) --- */
+.card-container {
+    width: 600px;
+    height: 378px;
+    position: relative;
+    background-image: url('/bg_clean.png');
+    background-size: cover;
+    background-position: center;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+/* Photo Area */
+.photo-area {
+    position: absolute;
+    top: 17%;
+    left: 6%;
+    width: 32.6%;
+    height: 41%;
+    z-index: 2;
+    background-color: #ddd;
+    /* Fallback */
+    overflow: hidden;
+    border: 2px solid #002147;
+    /* Blue border to match theme */
+}
+
+.id-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Info Area (Name, Role, ID) */
+.info-area {
+    position: absolute;
+    bottom: 16%;
+    left: 48%;
+    /* Adjusted based on previous css fragments */
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #000;
+    text-align: left;
+}
+
+.name {
+    font-size: 26px;
+    font-weight: 800;
+    color: #002147;
+    /* Appleby Blue */
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-bottom: 5px;
+}
+
+.role {
+    font-size: 16px;
+    font-weight: 700;
+    color: #333;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.id-number {
+    font-size: 14px;
+    color: #555;
+    font-weight: 600;
+}
+
+/* Barcode Area (Visual only for preview) */
+.barcode-area {
+    position: absolute;
+    bottom: 2%;
+    right: 5%;
+    width: 30%;
+    height: 40px;
+    /* Placeholder for barcode */
+    background: repeating-linear-gradient(90deg,
+            #000,
+            #000 2px,
+            #fff 2px,
+            #fff 4px);
+    opacity: 0.7;
+}
+
+.validity {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: #666;
+}
