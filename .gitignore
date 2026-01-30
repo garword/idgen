@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Environment
+.env
+
+# Generated files
+temp/
+*.png
+*.jpg
+
+# API Keys (sensitive)
+data/api-keys.json
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db

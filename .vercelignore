@@ -1,0 +1,10 @@
+node_modules
+.env
+.env.local
+*.log
+temp
+*.png
+*.jpg
+data/api-keys.json
+.git
+.vscode

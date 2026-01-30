@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ID Card Generator API - Documentation</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: #002147;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 2rem;
+        }
+
+        section {
+            margin-bottom: 3rem;
+        }
+
+        h2 {
+            color: #002147;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            color: #444;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .endpoint {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+        }
+
+        .endpoint-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .method {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.875rem;
+        }
+
+        .method.post {
+            background: #28a745;
+            color: white;
+        }
+
+        .method.get {
+            background: #007bff;
+            color: white;
+        }
+
+        .endpoint-path {
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            color: #002147;
+        }
+
+        pre {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 1.5rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+
+        .alert-info {
+            background: #d1ecf1;
+            border-left: 4px solid #0c5460;
+            color: #0c5460;
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            border-left: 4px solid #856404;
+            color: #856404;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+        }
+
+        th,
+        td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #002147;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #c7254e;
+        }
+
+        .demo-key {
+            background: #fff3cd;
+            border: 2px dashed #f0ad4e;
+            padding: 1rem;
+            border-radius: 6px;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .demo-key strong {
+            font-size: 1.2rem;
+            color: #856404;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>🎫 ID Card Generator API</h1>
+            <p>Generate professional Appleby College ID cards programmatically</p>
+        </header>
+
+        <div class="content">
+            <!-- Quick Start -->
+            <section id="quick-start">
+                <h2>🚀 Quick Start</h2>
+
+                <div class="alert alert-info">
+                    <strong>Base URL:</strong> <code>http://localhost:3000</code>
+                </div>
+
+                <div class="demo-key">
+                    <strong>Demo API Key:</strong> <code>windaacantik</code>
+                </div>
+
+                <h3>Installation</h3>
+                <pre># Install dependencies
+npm install
+
+# Copy environment template
+copy .env.example .env
+
+# Start server
+npm start</pre>
+
+                <p>The server will start on port 3000 by default.</p>
+            </section>
+
+            <!-- Authentication -->
+            <section id="authentication">
+                <h2>🔐 Authentication</h2>
+                <p>All API requests require an API key in the request header:</p>
+                <pre>X-API-Key: your-api-key-here</pre>
+
+                <div class="alert alert-warning">
+                    <strong>Admin Key:</strong> To create new API keys, use the admin key from your <code>.env</code>
+                    file.
+                </div>
+            </section>
+
+            <!-- Endpoints -->
+            <section id="endpoints">
+                <h2>📡 API Endpoints</h2>
+
+                <!-- Generate Card -->
+                <div class="endpoint">
+                    <div class="endpoint-title">
+                        <span class="method post">POST</span>
+                        <span class="endpoint-path">/api/generate</span>
+                    </div>
+                    <p><strong>Generate an ID card</strong></p>
+
+                    <h4>Headers</h4>
+                    <pre>X-API-Key: your-api-key-here
+Content-Type: application/json</pre>
+
+                    <h4>Request Body</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Field</th>
+                                <th>Type</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>name</code></td>
+                                <td>string</td>
+                                <td>✅</td>
+                                <td>Full name (e.g., "JOHN DOE")</td>
+                            </tr>
+                            <tr>
+                                <td><code>role</code></td>
+                                <td>string</td>
+                                <td>✅</td>
+                                <td>Role/position (e.g., "STUDENT", "FACULTY / TEACHER")</td>
+                            </tr>
+                            <tr>
+                                <td><code>idNumber</code></td>
+                                <td>string</td>
+                                <td>✅</td>
+                                <td>ID number (e.g., "AC-S-12345")</td>
+                            </tr>
+                            <tr>
+                                <td><code>validFrom</code></td>
+                                <td>string</td>
+                                <td>❌</td>
+                                <td>Start year (default: "2024")</td>
+                            </tr>
+                            <tr>
+                                <td><code>validTo</code></td>
+                                <td>string</td>
+                                <td>❌</td>
+                                <td>End year (default: "2029")</td>
+                            </tr>
+                            <tr>
+                                <td><code>photo</code></td>
+                                <td>string</td>
+                                <td>❌</td>
+                                <td>Base64 encoded photo or image URL</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4>Example Request</h4>
+                    <pre>{
+  "name": "JOHN DOE",
+  "role": "STUDENT",
+  "idNumber": "AC-S-12345",
+  "validFrom": "2024",
+  "validTo": "2029",
+  "photo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA..."
+}</pre>
+
+                    <h4>Example Response</h4>
+                    <pre>{
+  "success": true,
+  "data": {
+    "cardId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "downloadUrl": "/api/download/a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "expiresIn": "24 hours"
+  }
+}</pre>
+                </div>
+
+                <!-- Download Card -->
+                <div class="endpoint">
+                    <div class="endpoint-title">
+                        <span class="method get">GET</span>
+                        <span class="endpoint-path">/api/download/:cardId</span>
+                    </div>
+                    <p><strong>Download a generated ID card</strong></p>
+
+                    <h4>Headers</h4>
+                    <pre>X-API-Key: your-api-key-here</pre>
+
+                    <h4>Response</h4>
+                    <p>PNG image file</p>
+                </div>
+
+                <!-- Create API Key (Admin) -->
+                <div class="endpoint">
+                    <div class="endpoint-title">
+                        <span class="method post">POST</span>
+                        <span class="endpoint-path">/api/keys/create</span>
+                    </div>
+                    <p><strong>Create new API key (Admin only)</strong></p>
+
+                    <h4>Headers</h4>
+                    <pre>X-Admin-Key: your-admin-key
+Content-Type: application/json</pre>
+
+                    <h4>Request Body</h4>
+                    <pre>{
+  "name": "Bot 1",
+  "description": "Production bot for automated ID card generation"
+}</pre>
+
+                    <h4>Example Response</h4>
+                    <pre>{
+  "success": true,
+  "data": {
+    "apiKey": "uuid-here",
+    "name": "Bot 1",
+    "description": "Production bot for automated ID card generation",
+    "createdAt": "2024-01-30T00:00:00.000Z"
+  }
+}</pre>
+                </div>
+
+                <!-- Validate Key -->
+                <div class="endpoint">
+                    <div class="endpoint-title">
+                        <span class="method get">GET</span>
+                        <span class="endpoint-path">/api/keys/validate</span>
+                    </div>
+                    <p><strong>Validate your API key</strong></p>
+
+                    <h4>Headers</h4>
+                    <pre>X-API-Key: your-api-key-here</pre>
+
+                    <h4>Example Response</h4>
+                    <pre>{
+  "success": true,
+  "valid": true,
+  "keyInfo": {
+    "name": "Demo Key",
+    "createdAt": "2024-01-30T00:00:00.000Z"
+  }
+}</pre>
+                </div>
+            </section>
+
+            <!-- Code Examples -->
+            <section id="examples">
+                <h2>💻 Code Examples</h2>
+
+                <h3>cURL</h3>
+                <pre>curl -X POST http://localhost:3000/api/generate \
+  -H "X-API-Key: windaacantik" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "JOHN DOE",
+    "role": "STUDENT",
+    "idNumber": "AC-S-12345"
+  }'</pre>
+
+                <h3>Python</h3>
+                <pre>import requests
+
+API_KEY = "demo-key-12345"
+BASE_URL = "http://localhost:3000"
+
+# Generate card
+response = requests.post(
+    f"{BASE_URL}/api/generate",
+    headers={"X-API-Key": API_KEY},
+    json={
+        "name": "JOHN DOE",
+        "role": "STUDENT",
+        "idNumber": "AC-S-12345",
+        "validFrom": "2024",
+        "validTo": "2029"
+    }
+)
+
+data = response.json()
+card_id = data["data"]["cardId"]
+
+# Download card
+img_response = requests.get(
+    f"{BASE_URL}/api/download/{card_id}",
+    headers={"X-API-Key": API_KEY}
+)
+
+with open("id_card.png", "wb") as f:
+    f.write(img_response.content)</pre>
+
+                <h3>JavaScript (Node.js)</h3>
+                <pre>const axios = require('axios');
+const fs = require('fs');
+
+const API_KEY = 'demo-key-12345';
+const BASE_URL = 'http://localhost:3000';
+
+async function generateCard() {
+  // Generate card
+  const response = await axios.post(
+    `${BASE_URL}/api/generate`,
+    {
+      name: 'JOHN DOE',
+      role: 'STUDENT',
+      idNumber: 'AC-S-12345',
+      validFrom: '2024',
+      validTo: '2029'
+    },
+    {
+      headers: { 'X-API-Key': API_KEY }
+    }
+  );
+
+  const cardId = response.data.data.cardId;
+
+  // Download card
+  const imgResponse = await axios.get(
+    `${BASE_URL}/api/download/${cardId}`,
+    {
+      headers: { 'X-API-Key': API_KEY },
+      responseType: 'arraybuffer'
+    }
+  );
+
+  fs.writeFileSync('id_card.png', imgResponse.data);
+}
+
+generateCard();</pre>
+            </section>
+
+            <!-- Error Handling -->
+            <section id="errors">
+                <h2>⚠️ Error Handling</h2>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Status Code</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>400</code></td>
+                            <td>Bad Request - Missing required fields</td>
+                        </tr>
+                        <tr>
+                            <td><code>401</code></td>
+                            <td>Unauthorized - Invalid or missing API key</td>
+                        </tr>
+                        <tr>
+                            <td><code>403</code></td>
+                            <td>Forbidden - Admin access required</td>
+                        </tr>
+                        <tr>
+                            <td><code>404</code></td>
+                            <td>Not Found - Card ID not found or expired</td>
+                        </tr>
+                        <tr>
+                            <td><code>500</code></td>
+                            <td>Internal Server Error</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>Error Response Format</h4>
+                <pre>{
+  "success": false,
+  "error": "Error message here"
+}</pre>
+            </section>
+
+            <!-- Rate Limiting -->
+            <section id="limits">
+                <h2>⏱️ Rate Limiting & Notes</h2>
+                <ul>
+                    <li>Generated cards expire after 24 hours</li>
+                    <li>Maximum image size: 10MB</li>
+                    <li>Supported image formats: JPG, PNG (as base64 or URL)</li>
+                    <li>Cards are automatically cleaned up after expiration</li>
+                </ul>
+            </section>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1024, height=648">
+    <title>ID Card Template</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 1024px;
+            height: 648px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        #id-card {
+            width: 600px;
+            height: 378px;
+            background-image: url('../appleby_bg_clean.png');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .photo-area {
+            position: absolute;
+            top: 40.9%;
+            left: 14.3%;
+            width: 32.6%;
+            height: 41.0%;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .id-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .info-area {
+            position: absolute;
+            top: 40%;
+            right: 8%;
+            width: 46%;
+            z-index: 3;
+        }
+
+        .name {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #002147;
+            margin-bottom: 0.5rem;
+            line-height: 1.1;
+        }
+
+        .role {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #444;
+            margin-bottom: 0.3rem;
+        }
+
+        .id-number {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .barcode-area {
+            position: absolute;
+            bottom: 8%;
+            right: 8%;
+            width: 46%;
+            z-index: 3;
+        }
+
+        .barcode {
+            width: 100%;
+            height: 50px;
+            background: repeating-linear-gradient(90deg,
+                    #000 0px,
+                    #000 2px,
+                    #fff 2px,
+                    #fff 4px);
+            margin-bottom: 0.3rem;
+        }
+
+        .validity {
+            font-size: 0.85rem;
+            color: #666;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="id-card">
+        <div class="photo-area">
+            <img src="" alt="ID Photo" class="id-photo" id="card-photo">
+        </div>
+
+        <div class="info-area">
+            <div class="name" id="card-name">NAMA</div>
+            <div class="role" id="card-role">ROLE</div>
+            <div class="id-number" id="card-id">ID: 00000</div>
+        </div>
+
+        <div class="barcode-area">
+            <div class="barcode"></div>
+            <div class="validity" id="card-valid">Valid: 2024-2029</div>
+        </div>
+    </div>
+</body>
+
+</html>
