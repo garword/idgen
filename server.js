@@ -21,8 +21,9 @@ app.use((req, res, next) => {
     next();
 });
 
-// Serve static files (documentation)
-app.use('/docs', express.static(path.join(__dirname, 'public')));
+// Serve static files
+app.use(express.static(path.join(__dirname, 'public'))); // Serves /generator.html, /js/..., /css/...
+app.use('/docs', express.static(path.join(__dirname, 'public'))); // Keep /docs/ working for backward compatibility
 
 // API Routes
 app.use('/api', apiRoutes);
