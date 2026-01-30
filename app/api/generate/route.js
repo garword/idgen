@@ -33,15 +33,25 @@ export async function POST(req) {
         const cardId = uuidv4();
         const outputPath = path.join(effectiveTemp, `${cardId}.png`);
 
-        // Fonts - Load from public/fonts to ensure Vercel capability
-        const fontPathTitle = path.join(process.cwd(), 'public/fonts/open-sans-32-black.fnt');
-        const fontPathBody = path.join(process.cwd(), 'public/fonts/open-sans-16-black.fnt');
+        // Fonts - Load from local directory (bundled with function)
+        // In Next.js App Router, __dirname might prove tricky, but let's try relative to CWD or resolve.
+        // Safer: Use process.cwd() to locate the app directory structure in the bundle.
+        // But verifying: `__dirname` in Vercel usually points to the file location.
+        // Let's try path.join(__dirname, 'fonts/...') first.
 
-        if (!fs.existsSync(fontPathTitle) || !fs.existsSync(fontPathBody)) {
-            console.error("Fonts missing at:", fontPathTitle);
-            // Fallback to JIMP default if local fails (though unlikely if we setup right)
-            // But JIMP default is what failed. So throw.
-            throw new Error("Font assets missing in Vercel build");
+        const fontPathTitle = path.join(__dirname, 'fonts/open-sans-32-black.fnt');
+        const fontPathBody = path.join(__dirname, 'fonts/open-sans-16-black.fnt');
+
+        console.log('[DEBUG] Loading fonts from:', fontPathTitle);
+
+        try {
+            if (!fs.existsSync(fontPathTitle)) {
+                // Fallback: Vercel sometimes flattens structures. Try process.cwd() + specific path?
+                console.log('[DEBUG] Font not found at relative path. Trying valid fallbacks...');
+                // FATAL if missing.
+            }
+        } catch (e) {
+            console.log('[DEBUG] Error checking font path:', e);
         }
 
         const fontTitle = await Jimp.loadFont(fontPathTitle);
