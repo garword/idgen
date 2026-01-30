@@ -24,11 +24,11 @@ class CardGenerator {
     async initBrowser() {
         if (!this.browser) {
             if (IS_PRODUCTION) {
-                // Use chrome-aws-lambda for Vercel/AWS Lambda
+                // Use @sparticuz/chromium for Vercel/AWS Lambda
                 this.browser = await puppeteerCore.launch({
-                    args: chromium.args,
+                    args: [...chromium.args, '--no-sandbox', '--disable-setuid-sandbox'],
                     defaultViewport: chromium.defaultViewport,
-                    executablePath: await chromium.executablePath,
+                    executablePath: await chromium.executablePath(),
                     headless: chromium.headless,
                 });
             } else {

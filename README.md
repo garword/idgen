@@ -1,6 +1,12 @@
 # ID Card Generator API
 
-REST API for generating Appleby College ID cards programmatically.
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/garword/idgen)
+
+REST API for generating Appleby College ID cards with Puppeteer.
+
+**Demo API Key:** `windaacantik`
+
+---
 
 ## 🚀 Quick Start
 
@@ -13,49 +19,36 @@ npm install
 # Create .env file
 copy .env.example .env
 
-# Edit .env and set your admin key
-
 # Start server
 npm start
 ```
 
-Server runs on: `http://localhost:3000`
-
-API Documentation: `http://localhost:3000/docs/index.html`
+**Server:** `http://localhost:3000`  
+**Docs:** `http://localhost:3000/docs/index.html`
 
 ### Deploy to Vercel
 
-See [DEPLOY.md](./DEPLOY.md) for complete deployment guide.
+See **[DEPLOY.md](./DEPLOY.md)** for complete guide.
 
-**Quick Deploy:**
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/yourusername/id-card-api)
-
+---
 
 ## 📖 API Endpoints
 
 ### Generate ID Card
 **POST** `/api/generate`
 
-Headers:
-```
-X-API-Key: your-api-key-here
-Content-Type: application/json
-```
-
-Body:
-```json
-{
-  "name": "JOHN DOE",
-  "role": "STUDENT",
-  "idNumber": "AC-S-12345",
-  "validFrom": "2024",
-  "validTo": "2029",
-  "photo": "data:image/png;base64,..."
-}
+```bash
+curl -X POST http://localhost:3000/api/generate \
+  -H "X-API-Key: windaacantik" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "JOHN DOE",
+    "role": "STUDENT",
+    "idNumber": "AC-S-12345"
+  }'
 ```
 
-Response:
+**Response:**
 ```json
 {
   "success": true,
@@ -70,73 +63,91 @@ Response:
 ### Download Card
 **GET** `/api/download/:cardId`
 
-Headers:
-```
-X-API-Key: your-api-key-here
-```
-
-Returns: PNG image file
-
-### Create API Key (Admin)
-**POST** `/api/keys/create`
-
-Headers:
-```
-X-Admin-Key: your-admin-key
-Content-Type: application/json
+```bash
+curl http://localhost:3000/api/download/CARD_ID \
+  -H "X-API-Key: windaacantik" \
+  --output card.png
 ```
 
-Body:
-```json
-{
-  "name": "Bot 1",
-  "description": "Production bot"
-}
+---
+
+## 🔑 Authentication
+
+All endpoints require API key header:
+```
+X-API-Key: windaacantik
 ```
 
-### Validate API Key
-**GET** `/api/keys/validate`
-
-Headers:
-```
-X-API-Key: your-api-key-here
-```
-
-## 🔑 Demo API Key
-
-For testing: `windaacantik`
-
-## 💻 Example Usage
-
-### Python
-```python
-import requests
-
-response = requests.post(
-    "http://localhost:3000/api/generate",
-    headers={"X-API-Key": "windaacantik"},
-    json={
-        "name": "JOHN DOE",
-        "role": "STUDENT",  
-        "idNumber": "AC-S-12345"
-    }
-)
-
-card_id = response.json()["data"]["cardId"]
-
-# Download
-img = requests.get(
-    f"http://localhost:3000/api/download/{card_id}",
-    headers={"X-API-Key": "windaacantik"}
-)
-
-with open("card.png", "wb") as f:
-    f.write(img.content)
+**Create new keys (Admin):**
+```bash
+curl -X POST http://localhost:3000/api/keys/create \
+  -H "X-Admin-Key: your-admin-key" \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Bot 1","description":"Production bot"}'
 ```
 
-## 📝 Notes
+---
 
-- Cards expire after 24 hours
-- Max image size: 10MB
-- Automatic cleanup of old files
-- See full documentation at `/docs/index.html`
+## 📦 Tech Stack
+
+- **Backend:** Node.js + Express
+- **Rendering:** Puppeteer + @sparticuz/chromium (Vercel)
+- **Auth:** API Key based
+- **Deploy:** Vercel Serverless
+
+---
+
+## 📝 Environment Variables
+
+Create `.env` file:
+
+```env
+PORT=3000
+ADMIN_KEY=your-super-secret-admin-key-change-this
+TEMP_DIR=./temp
+MAX_FILE_AGE_HOURS=24
+ALLOWED_ORIGINS=*
+NODE_ENV=development
+```
+
+For Vercel deployment, set these in Vercel Dashboard.
+
+---
+
+## 🎯 Features
+
+✅ Generate ID cards programmatically  
+✅ API Key authentication  
+✅ Temporary file storage (24h)  
+✅ Automatic cleanup  
+✅ Interactive documentation  
+✅ Serverless ready (Vercel)  
+
+---
+
+## 📚 Documentation
+
+Full API docs available at: `/docs/index.html`
+
+Deployment guide: [DEPLOY.md](./DEPLOY.md)
+
+---
+
+## 🔧 Development
+
+```bash
+# Install dependencies
+npm install
+
+# Start dev server with auto-reload
+npm run dev
+
+# Start production server
+npm start
+```
+
+---
+
+## 📄 License
+
+MIT
