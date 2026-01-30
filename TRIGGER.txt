@@ -1,0 +1,4 @@
+# TRIGGER REBUILD
+Vercel usually auto-detects changes.
+This file is here just to ensure a new commit hash is generated.
+Timestamp: 2026-01-30 21:58
