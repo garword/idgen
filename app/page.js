@@ -80,33 +80,39 @@ export default function Home() {
   return (
     <div className="app-container">
       <section className="controls-section">
-        <h1>ID Generator</h1>
+        <h2>ID Generator</h2>
+        <p className="subtitle">Isi data di bawah untuk mengubah kartu secara real-time.</p>
 
-        <div className="input-group">
-          <label>Full Name</label>
-          <input type="text" name="name" value={formData.name} onChange={handleInputChange} maxLength="20" />
+        <div className="form-group">
+          <label>Nama Lengkap</label>
+          <input type="text" name="name" value={formData.name} onChange={handleInputChange} maxLength="20" placeholder="MARIA SANTO" />
         </div>
 
-        <div className="input-group">
-          <label>Role</label>
-          <input type="text" name="role" value={formData.role} onChange={handleInputChange} maxLength="15" />
+        <div className="form-group">
+          <label>Jabatan / Posisi</label>
+          <input type="text" name="role" value={formData.role} onChange={handleInputChange} maxLength="15" placeholder="FACULTY / TEACHER" />
         </div>
 
-        <div className="input-group">
-          <label>ID Number</label>
-          <input type="text" name="idNumber" value={formData.idNumber} onChange={handleInputChange} maxLength="10" />
+        <div className="form-group">
+          <label>Nomor ID</label>
+          <input type="text" name="idNumber" value={formData.idNumber} onChange={handleInputChange} maxLength="10" placeholder="AC-T-45892" />
         </div>
 
-        <div className="input-group">
-          <label>Photo</label>
+        <div className="form-group">
+          <label>Upload Foto</label>
           <input type="file" onChange={handlePhotoUpload} accept="image/*" />
+          <small style={{ display: 'block', marginTop: '5px', color: '#666', fontSize: '0.8rem' }}>Format: JPG, PNG. Disarankan rasio potret.</small>
         </div>
 
         <button onClick={generateCard} disabled={isLoading} className="download-btn">
-          {isLoading ? 'Generating...' : 'Download Card'}
+          {isLoading ? 'Generating HQ Card...' : 'Download Card'}
         </button>
 
-        {error && <p className="error">{error}</p>}
+        <div className="instructions">
+          Info: Gunakan tombol Download untuk menyimpan hasil kartu ke komputer Anda.
+        </div>
+
+        {error && <p className="error" style={{ color: 'red', marginTop: '10px' }}>{error}</p>}
       </section>
 
       {/* Live Preview Section */}
