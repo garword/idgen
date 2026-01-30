@@ -33,9 +33,19 @@ export async function POST(req) {
         const cardId = uuidv4();
         const outputPath = path.join(effectiveTemp, `${cardId}.png`);
 
-        // Fonts
-        const fontTitle = await Jimp.loadFont(Jimp.FONT_SANS_32_BLACK);
-        const fontBody = await Jimp.loadFont(Jimp.FONT_SANS_16_BLACK);
+        // Fonts - Load from public/fonts to ensure Vercel capability
+        const fontPathTitle = path.join(process.cwd(), 'public/fonts/open-sans-32-black.fnt');
+        const fontPathBody = path.join(process.cwd(), 'public/fonts/open-sans-16-black.fnt');
+
+        if (!fs.existsSync(fontPathTitle) || !fs.existsSync(fontPathBody)) {
+            console.error("Fonts missing at:", fontPathTitle);
+            // Fallback to JIMP default if local fails (though unlikely if we setup right)
+            // But JIMP default is what failed. So throw.
+            throw new Error("Font assets missing in Vercel build");
+        }
+
+        const fontTitle = await Jimp.loadFont(fontPathTitle);
+        const fontBody = await Jimp.loadFont(fontPathBody);
 
         // Load Background (From public folder)
         const bgPath = path.join(process.cwd(), 'public', 'bg_clean.png');
