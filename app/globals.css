@@ -9,13 +9,12 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #222;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
   min-height: 100vh;
   margin: 0;
+  padding: 0;
 }
 
 .app-container {
@@ -65,7 +64,6 @@ body {
   font-size: 1rem;
 }
 
-/* Download Button Styles */
 .download-btn {
   background-color: #002147;
   color: white;
@@ -124,10 +122,11 @@ body {
   height: 41%;
   z-index: 2;
   background-color: #ddd;
-  /* Fallback */
   overflow: hidden;
   border: 2px solid #002147;
-  /* Blue border to match theme */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .id-photo {
@@ -136,66 +135,82 @@ body {
   object-fit: cover;
 }
 
-/* Info Area (Name, Role, ID) */
-.info-area {
+/* 
+   IMPORTANT: The original design nested the text info INSIDE .barcode-area 
+   or used .barcode-area as the main container for the right side.
+   We replicate that structure here.
+*/
+.barcode-area {
   position: absolute;
   bottom: 16%;
   left: 48%;
-  /* Adjusted based on previous css fragments */
-  width: 45%;
+  width: 38%;
   display: flex;
   flex-direction: column;
   z-index: 2;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #000;
+  padding-left: 10px;
   text-align: left;
 }
 
-.name {
+/* Text Styles inside barcode-area */
+.name-text {
   font-size: 26px;
   font-weight: 800;
   color: #002147;
-  /* Appleby Blue */
   text-transform: uppercase;
   line-height: 1.1;
-  margin-bottom: 5px;
+  margin: 0 0 5px 0;
 }
 
-.role {
+.role-text {
   font-size: 16px;
   font-weight: 700;
   color: #333;
   text-transform: uppercase;
-  margin-bottom: 4px;
+  margin: 0 0 4px 0;
 }
 
-.id-number {
+.id-text {
   font-size: 14px;
   color: #555;
   font-weight: 600;
+  margin: 0 0 10px 0;
 }
 
-/* Barcode Area (Visual only for preview) */
-.barcode-area {
-  position: absolute;
-  bottom: 2%;
-  right: 5%;
-  width: 30%;
-  height: 40px;
-  /* Placeholder for barcode */
+/* Barcode Visual */
+.barcode {
+  height: 35px;
+  width: 100%;
+  /* Placeholder gradient for preview */
   background: repeating-linear-gradient(90deg,
       #000,
       #000 2px,
       #fff 2px,
       #fff 4px);
-  opacity: 0.7;
+  margin-top: 5px;
 }
 
 .validity {
-  position: absolute;
-  bottom: 5px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 10px;
-  color: #666;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  margin-top: 4px;
+  color: #000;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .app-container {
+    flex-direction: column;
+  }
+
+  .controls-section {
+    width: 100%;
+  }
+
+  .card-container {
+    transform: scale(0.6);
+    margin: 20px 0;
+  }
 }

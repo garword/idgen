@@ -123,22 +123,19 @@ export default function Home() {
             {previewPhoto ? (
               <img src={previewPhoto} alt="ID Photo" className="id-photo" />
             ) : (
-              <div style={{ width: '100%', height: '100%', backgroundColor: '#ccc', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#666', fontSize: '12px' }}>
-                NO PHOTO
-              </div>
+              <span style={{ color: '#666', fontSize: '12px' }}>NO PHOTO</span>
             )}
           </div>
 
-          {/* Info Area */}
-          <div className="info-area">
-            <div className="name" dangerouslySetInnerHTML={{ __html: formData.name.replace(/\n/g, '<br/>') || 'YOUR NAME' }}></div>
-            <div className="role">{formData.role || 'ROLE'}</div>
-            <div className="id-number">ID: {formData.idNumber || '000000'}</div>
-          </div>
+          {/* Combined Info & Barcode Area (Original Structure) */}
+          <div className="barcode-area">
+            <h1 className="name-text" dangerouslySetInnerHTML={{ __html: formData.name.replace(/\n/g, '<br/>') || 'YOUR NAME' }}></h1>
+            <h2 className="role-text">{formData.role || 'ROLE'}</h2>
+            <h3 className="id-text">ID: {formData.idNumber || '000000'}</h3>
 
-          {/* Decoratives (Barcode placeholder) */}
-          <div className="barcode-area"></div>
-          {/* <div className="validity">Valid: 2023-2024</div> */}
+            <div className="barcode"></div>
+            <div className="validity">Valid: {formData.validFrom}-{formData.validTo}</div>
+          </div>
         </div>
       </section>
     </div>
