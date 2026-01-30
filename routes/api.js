@@ -4,7 +4,7 @@ const path = require('path');
 const fs = require('fs');
 const { requireApiKey, requireAdminKey } = require('../middleware/auth');
 const keyManager = require('../utils/keyManager');
-const cardGenerator = require('../utils/cardGenerator');
+const cardGenerator = require('../utils/generatorEngine');
 
 // Generate ID Card
 router.post('/generate', requireApiKey, async (req, res) => {
