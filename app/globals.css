@@ -105,7 +105,7 @@ body {
   width: 600px;
   height: 378px;
   position: relative;
-  background-image: url('/bg_clean.png');
+  background-image: url('/card_bg_original.png');
   background-size: cover;
   background-position: center;
   border-radius: 12px;
