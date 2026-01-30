@@ -127,12 +127,15 @@ export default function Home() {
             )}
           </div>
 
-          {/* Combined Info & Barcode Area (Original Structure) */}
-          <div className="barcode-area">
-            <h1 className="name-text" dangerouslySetInnerHTML={{ __html: formData.name.replace(/\n/g, '<br/>') || 'YOUR NAME' }}></h1>
-            <h2 className="role-text">{formData.role || 'ROLE'}</h2>
-            <h3 className="id-text">ID: {formData.idNumber || '000000'}</h3>
+          {/* Info Area (Top Right) */}
+          <div className="info-area">
+            <div className="name" dangerouslySetInnerHTML={{ __html: formData.name.replace(/\n/g, '<br/>') || 'YOUR NAME' }}></div>
+            <div className="role">{formData.role || 'ROLE'}</div>
+            <div className="id-number">ID: {formData.idNumber || '000000'}</div>
+          </div>
 
+          {/* Barcode Area (Bottom Right) */}
+          <div className="barcode-area">
             <div className="barcode"></div>
             <div className="validity">Valid: {formData.validFrom}-{formData.validTo}</div>
           </div>

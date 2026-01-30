@@ -135,11 +135,46 @@ body {
   object-fit: cover;
 }
 
-/* 
-   IMPORTANT: The original design nested the text info INSIDE .barcode-area 
-   or used .barcode-area as the main container for the right side.
-   We replicate that structure here.
-*/
+/* Info Area (Name, Role, ID) - Restored from Original CSS */
+.info-area {
+  position: absolute;
+  left: 48%;
+  top: 37%;
+  width: 47%;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+  text-align: left;
+}
+
+.name {
+  font-family: 'Arial Black', 'Arial Bold', Arial, sans-serif;
+  font-weight: 900;
+  font-size: 24px;
+  color: #1a1a1a;
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin-bottom: 5px;
+}
+
+.role {
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #333;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.id-number {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #555;
+  font-weight: 600;
+}
+
+/* Barcode Area - Restored from Original CSS */
 .barcode-area {
   position: absolute;
   bottom: 16%;
@@ -149,54 +184,25 @@ body {
   flex-direction: column;
   z-index: 2;
   padding-left: 10px;
-  text-align: left;
-}
-
-/* Text Styles inside barcode-area */
-.name-text {
-  font-size: 26px;
-  font-weight: 800;
-  color: #002147;
-  text-transform: uppercase;
-  line-height: 1.1;
-  margin: 0 0 5px 0;
-}
-
-.role-text {
-  font-size: 16px;
-  font-weight: 700;
-  color: #333;
-  text-transform: uppercase;
-  margin: 0 0 4px 0;
-}
-
-.id-text {
-  font-size: 14px;
-  color: #555;
-  font-weight: 600;
-  margin: 0 0 10px 0;
 }
 
 /* Barcode Visual */
 .barcode {
   height: 35px;
   width: 100%;
-  /* Placeholder gradient for preview */
   background: repeating-linear-gradient(90deg,
       #000,
       #000 2px,
       #fff 2px,
       #fff 4px);
-  margin-top: 5px;
 }
 
 .validity {
   font-family: Arial, sans-serif;
-  font-size: 12px;
+  font-size: 13px;
   margin-top: 4px;
   color: #000;
   font-weight: bold;
-  text-align: center;
 }
 
 /* Responsive */
