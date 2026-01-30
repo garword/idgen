@@ -5,9 +5,9 @@ import './globals.css';
 
 export default function Home() {
   const [formData, setFormData] = useState({
-    name: 'YOUR NAME',
-    role: 'STUDENT',
-    idNumber: '000000',
+    name: 'MARIA SANTO',
+    role: 'FACULTY / TEACHER',
+    idNumber: 'AC-T-45892',
     validFrom: '2022',
     validTo: '2027',
   });
@@ -80,7 +80,7 @@ export default function Home() {
   return (
     <div className="app-container">
       <section className="controls-section">
-        <h2>ID Generator</h2>
+        <h2>Buat Kartu ID</h2>
         <p className="subtitle">Isi data di bawah untuk mengubah kartu secara real-time.</p>
 
         <div className="form-group">

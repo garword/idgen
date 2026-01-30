@@ -113,20 +113,23 @@ body {
   overflow: hidden;
 }
 
-/* Photo Area */
+/* Photo Area - Restored Exact Original Position & Translucency */
 .photo-area {
   position: absolute;
-  top: 17%;
-  left: 6%;
+  /* INSET WITH PADDING FROM BLUE BORDER */
+  top: 40.9%;
+  left: 14.3%;
   width: 32.6%;
-  height: 41%;
+  height: 41.0%;
   z-index: 2;
-  background-color: #ddd;
   overflow: hidden;
-  border: 2px solid #002147;
+  /* Original CSS had background: transparent */
+  background: transparent !important;
   display: flex;
   align-items: center;
   justify-content: center;
+  /* Remove border from div because it's part of background image */
+  border: none;
 }
 
 .id-photo {
