@@ -26,10 +26,20 @@ class CardGenerator {
             if (IS_PRODUCTION) {
                 // Use @sparticuz/chromium for Vercel/AWS Lambda
                 this.browser = await puppeteerCore.launch({
-                    args: [...chromium.args, '--no-sandbox', '--disable-setuid-sandbox'],
+                    args: [
+                        ...chromium.args,
+                        '--no-sandbox',
+                        '--disable-setuid-sandbox',
+                        '--disable-dev-shm-usage',
+                        '--disable-gpu',
+                        '--no-first-run',
+                        '--no-zygote',
+                        '--single-process'
+                    ],
                     defaultViewport: chromium.defaultViewport,
                     executablePath: await chromium.executablePath(),
                     headless: chromium.headless,
+                    ignoreHTTPSErrors: true
                 });
             } else {
                 // Use regular puppeteer for local development
