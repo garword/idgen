@@ -51,13 +51,20 @@ class CardGenerator {
 
             // 1. Load Background
             const bgPath = path.join(__dirname, '../bg_clean.png');
-            const image = await Jimp.read(bgPath);
-            // Original bg size: ~600x378 based on CSS? 
-            // measure.html said: "CLEAN: 1004 x 638". 
-            // We should use the natural size.
+            console.log(`[DEBUG] __dirname: ${__dirname}`);
+            console.log(`[DEBUG] Expected bgPath: ${bgPath}`);
 
-            const WIDTH = image.bitmap.width;   // 1004
-            const HEIGHT = image.bitmap.height; // 638
+            if (!fs.existsSync(bgPath)) {
+                console.error(`[FATAL] Background file missing at: ${bgPath}`);
+                // List files in current dir and parent to debug
+                console.log(`[DEBUG] Files in ${__dirname}:`, fs.readdirSync(__dirname));
+                console.log(`[DEBUG] Files in ../:`, fs.readdirSync(path.join(__dirname, '../')));
+                throw new Error(`Background image not found at ${bgPath}`);
+            }
+
+            const image = await Jimp.read(bgPath);
+            console.log('[DEBUG] Background loaded successfully');
+
 
             // 2. Process User Photo
             if (photo) {
