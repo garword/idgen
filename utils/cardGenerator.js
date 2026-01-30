@@ -1,5 +1,5 @@
 const Jimp = require('jimp');
-const { createCanvas } = require('canvas'); // Or pure JS barcode generator if canvas is issue, but jsbarcode usually needs canvas. 
+// Canvas removed to avoid Vercel binary issues 
 // Actually JIMP is pure JS. JsBarcode can allow text output, but usually needs a canvas for image.
 // Vercel supports 'canvas' mostly, but let's be careful. 
 // Safer: Use a buffer based barcode generator or just draw lines?
