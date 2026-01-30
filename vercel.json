@@ -8,18 +8,11 @@
     ],
     "routes": [
         {
-            "src": "/docs/(.*)",
-            "dest": "/public/$1"
-        },
-        {
             "src": "/(.*)",
             "dest": "/server.js"
         }
     ],
     "env": {
         "NODE_ENV": "production"
-    },
-    "regions": [
-        "sin1"
-    ]
+    }
 }
