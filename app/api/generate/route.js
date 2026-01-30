@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import Jimp from 'jimp';
+// import Jimp from 'jimp'; // ESM import issues with 0.22.12
+const Jimp = require('jimp');
 import bwipjs from 'bwip-js';
 import path from 'path';
 import fs from 'fs';
