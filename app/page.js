@@ -24,6 +24,30 @@ export default function Home() {
     setFormData(prev => ({ ...prev, [name]: value.toUpperCase() }));
   };
 
+  // Barcode Generation Effect (Ported from original script.js)
+  const barcodeRef = useRef(null);
+
+  useEffect(() => {
+    if (barcodeRef.current) {
+      const container = barcodeRef.current;
+      container.innerHTML = '';
+
+      // Original logic from script.js:createBarcodeDOM
+      for (let i = 0; i < 60; i++) {
+        const bar = document.createElement('div');
+        bar.classList.add('barcode-bar');
+
+        const width = Math.floor(Math.random() * 3) + 1;
+        bar.style.width = width + 'px';
+
+        const gap = Math.floor(Math.random() * 3) + 1;
+        bar.style.marginRight = gap + 'px';
+
+        container.appendChild(bar);
+      }
+    }
+  }, []); // Run once on mount
+
   const handlePhotoUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -134,9 +158,10 @@ export default function Home() {
             <div className="id-number">ID: {formData.idNumber || '000000'}</div>
           </div>
 
+
           {/* Barcode Area (Bottom Right) */}
           <div className="barcode-area">
-            <div className="barcode"></div>
+            <div className="barcode" ref={barcodeRef}></div>
             <div className="validity">Valid: {formData.validFrom}-{formData.validTo}</div>
           </div>
         </div>
