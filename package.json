@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "bwip-js": "^4.8.0",
-    "jimp": "^1.6.0",
+    "jimp": "^0.22.12",
     "next": "16.1.6",
     "react": "19.2.3",
     "react-dom": "19.2.3",
